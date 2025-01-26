@@ -15,10 +15,15 @@ function App() {
           headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
+            const movieFromServer = await response.json();
           setMovies([...movies, movie]);
           setAddingMovie(false);
         }
       }
+
+
+
+
 
 
     useEffect(() => {
@@ -31,6 +36,19 @@ function App() {
         };
         fetchMovies();
     }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
