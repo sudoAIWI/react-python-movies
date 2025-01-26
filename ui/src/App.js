@@ -12,7 +12,26 @@ function App() {
         setMovies([...movies, movie]);
         setAddingMovie(false);
     }
+    
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     return (
         <div className="container">
             <h1>My favourite movies to watch</h1>
