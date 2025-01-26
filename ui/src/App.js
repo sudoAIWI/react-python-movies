@@ -29,7 +29,15 @@ function App() {
 
 
 
-
+    async function handleDeleteMovie(movie) {
+        const response = await fetch(`/movies/${movie.id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            const nextMovies = movies.filter(m => m !== movie);
+            setMovies(nextMovies);
+        }
+    }
 
 
 
