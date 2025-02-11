@@ -22,3 +22,36 @@ Accept: application/json
 
 DELETE http://127.0.0.1:8000/movies/5
 Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/actors
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/actors/2
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/actors
+Content-Type: application/json
+
+{
+"name": "Al",
+"surname": "Pacino"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/actors/2
+
+###
+
+POST http://127.0.0.1:8000/movies/2/actors
+Content-Type: application/json
+
+{
+  "actor_id": 1
+}

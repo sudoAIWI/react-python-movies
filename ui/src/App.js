@@ -3,10 +3,16 @@ import {useState, useEffect} from "react";
 import "milligram";
 import MovieForm from "./MovieForm";
 import MoviesList from "./MoviesList";
+import ActorForm from "./ActorForm";
+import ActorsList from "./ActorsList";
+import { ToastContentProps, ToastContainer, toast } from 'react-toastify';
+import Loading from "./Loading";
 
 function App() {
     const [movies, setMovies] = useState([]);
     const [addingMovie, setAddingMovie] = useState(false);
+    const [actors, setActors] = useState([]);
+    const [addingActor, setAddingActor] = useState(false);
 
     async function handleAddMovie(movie) {
         const response = await fetch('/movies', {
