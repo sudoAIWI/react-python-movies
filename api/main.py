@@ -49,6 +49,7 @@ def get_movie(movie_id: int):
     db_movie = models.Movie.filter(models.Movie.id == movie_id).first()
     if db_movie is None:
         raise HTTPException(status_code=404, detail="Movie not found")
+    db_movie.actors.clear()
     db_movie.delete_instance()
     return db_movie
 
