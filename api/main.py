@@ -6,6 +6,12 @@ from fastapi.responses import FileResponse
 
 import schemas
 import models
+import logging
+import time
+
+logger = logging.getLogger('peewee')
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="../ui/build/static", check_dir=False), name="static")
@@ -18,6 +24,7 @@ def serve_react_app():
 
 @app.get("/movies", response_model=List[schemas.Movie])
 def get_movies():
+    time.sleep(1)
     return list(models.Movie.select())
 
 
