@@ -116,27 +116,67 @@ function App() {
         else {toast.error ("Failed to delete actor")}
     }
 
+    async function deleteConfirmationModal(){
+        return new Promise(resolve => {
+            toast(deleteConfirm, {
+                autoClose: false,
+                position: 'top-center',
+                onClose(reason) {
+                    if (reason === "delete") {
+                        resolve(true)
+                    } else {
+                        resolve(false)
+                    }
+                }
+            });
+        });
+    }
+
+    function deleteConfirm({ closeToast }) {
+        return (
+          <div class="confirmation-toast">
+            Are you sure you want to delete this?
+            <button class="button" onClick={() => closeToast("delete")}>Yes, delete</button>
+            <button class="button button-outline" onClick={() => closeToast("cancel")}>Cancel</button>
+          </div>
+        )
+      }
 
 
 
-
-
-
-    return (
+      return (
         <div className="container">
-            <h1>My favourite movies to watch</h1>
-            {movies.length === 0
-                ? <p>No movies yet. Maybe add something?</p>
-                : <MoviesList movies={movies}
-                              onDeleteMovie={(movie) => setMovies(movies.filter(m => m !== movie))}
-                />}
-            {addingMovie
-                ? <MovieForm onMovieSubmit={handleAddMovie}
-                             buttonLabel="Add a movie"
-                />
-                : <button onClick={() => setAddingMovie(true)}>Add a movie</button>}
-        </div>
-    );
-}
+            <ToastContainer/>
+            <div className="row">
+                <h1>My favourite movies to watch</h1>
+            </div>
+            <div className="row">
+            <div className="column">
+                    <MoviesList movies={movies}
+                                onDeleteMovie={handleDeleteMovie}
+                    />
+                    {addingMovie
+                        ? <MovieForm onMovieSubmit={handleAddMovie}
+                                     buttonLabel="Add a movie"
+                        />
+                        : <button onClick={() => setAddingMovie(true)}>Add a movie</button>}
+                </div>
+                <div className="column column-25">
+                    {actors.length === 0
+                        ? <Loading/>
+                        : <ActorsList actors={actors}
+                                      onDeleteActor={handleDeleteActor}
+                        />}
+                    {addingActor
+                        ? <ActorForm onActorSubmit={handleAddActor}
+                                     buttonLabel="Add an actor"
+                        />
+                        : <button onClick={() => setAddingActor(true)}>Add an actor</button>}
+                </div>
+                </div>
+            </div>
+            );
 
-export default App;
+            }
+
+            export default App;
