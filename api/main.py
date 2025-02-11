@@ -29,9 +29,11 @@ def get_movies():
 
 
 @app.post("/movies", response_model=schemas.Movie)
-def add_movie(movie: schemas.MovieBase):
-    movie = models.Movie.create(**movie.dict())
-    return movie
+def add_movie(movie: schemas.MovieCreate):
+    db_movie = models.Movie.create(**movie.dict())
+    for actor in movie.actors_id:
+        db_movie.actors.add(models.Actor(id=actor))
+    return db_movie
 
 
 @app.get("/movies/{movie_id}", response_model=schemas.Movie)
