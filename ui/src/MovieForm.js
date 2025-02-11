@@ -1,4 +1,6 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import React from 'react'
+import Select from 'react-select'
 
 export default function MovieForm(props) {
     const [title, setTitle] = useState('');
