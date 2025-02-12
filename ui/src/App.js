@@ -15,6 +15,31 @@ function App() {
     const [addingActor, setAddingActor] = useState(false);
 
 
+    useEffect(() => {
+        const fetchMovies = async () => {
+            const response = await fetch(`/movies`);
+            if (response.ok) {
+                const movies = await response.json();
+                setMovies(movies);
+            }
+            else {toast.error ("Sorry! We couldn't load movies")}
+        };
+        fetchMovies();
+    }, []);
+
+
+    useEffect(() => {
+        const fetchActors = async () => {
+            const response = await fetch(`/actors`);
+            if (response.ok) {
+                const actors = await response.json();
+                setActors(actors);
+            }
+            else {toast.error ("Sorry! We couldn't load actors")}
+        };
+        fetchActors();
+    }, []);
+
 
     async function handleAddMovie(movie) {
         const response = await fetch('/movies', {
@@ -35,29 +60,9 @@ function App() {
 
 
 
-      useEffect(() => {
-        const fetchMovies = async () => {
-            const response = await fetch(`/movies`);
-            if (response.ok) {
-                const movies = await response.json();
-                setMovies(movies);
-            }
-            else {toast.error ("Sorry! We couldn't load movies")}
-        };
-        fetchMovies();
-    }, []);
 
-    useEffect(() => {
-        const fetchActors = async () => {
-            const response = await fetch(`/actors`);
-            if (response.ok) {
-                const actors = await response.json();
-                setActors(actors);
-            }
-            else {toast.error ("Sorry! We couldn't load actors")}
-        };
-        fetchActors();
-    }, []);
+
+
 
 
     async function handleAddActor(actor) {
